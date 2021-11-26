@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NamedQuery(name="consultarTrabajadores", query="select e from Employee e")
 @Table(name="person")
 public class Person {
     private int id;
