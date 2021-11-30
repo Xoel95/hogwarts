@@ -58,4 +58,13 @@ public class House {
     public void setPersonByHeadTeacher(Person personByHeadTeacher) {
         this.personByHeadTeacher = personByHeadTeacher;
     }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", personByHeadTeacher=" + personByHeadTeacher +
+                '}';
+    }
 }

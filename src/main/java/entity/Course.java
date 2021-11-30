@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NamedNativeQuery(
+        name = "getCoursesProfessors",
+        query = "select * from course c left join person p on p.id=c.teacher_id;",
+        resultClass=Course.class
+)
 @Table(name="course")
 public class Course {
     private int id;
@@ -69,5 +74,14 @@ public class Course {
 
     public void setTeacher(Person teacher) {
         this.teacher = teacher;
+    }
+
+    @Override
+    public String toString() {
+        String s = "El curso de nombre " + name + " y id " + id;
+        if (teacher != null){
+            s = s + " esta impartido por " + teacher.getFirstName() + " " + teacher.getLastName();
+        }
+        return s;
     }
 }

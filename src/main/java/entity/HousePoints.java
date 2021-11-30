@@ -3,7 +3,12 @@ package entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "house_points", schema = "hogwarts", catalog = "")
+@NamedNativeQuery(
+        name = "getAllTeachersAndTheirPoints",
+        query = "select * from house_points hp inner join person p where p.id=hp.giver group by p.id;",
+        resultClass=HousePoints.class
+)
+@Table(name = "house_points")
 public class HousePoints {
     private int id;
     private Integer points;
@@ -68,5 +73,11 @@ public class HousePoints {
 
     public void setPersonByReceiver(Person personByReceiver) {
         this.personByReceiver = personByReceiver;
+    }
+
+    @Override
+    public String toString() {
+        return "El profesor " + personByGiver.getFirstName() + " " + personByGiver.getLastName() + " dió "
+                + points + " puntos";
     }
 }
