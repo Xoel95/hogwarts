@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name="consultarAlumnosMaestro", query="select p from Person p INNER JOIN p.courses c WHERE c.teacher.id = ?1")
+@NamedQuery(name="consultarAlumnosMaestro", query="SELECT p FROM Person p INNER JOIN p.courses c WHERE c.teacher.id = ?1")
+@NamedQuery(name="personaRecibirPuntosMax", query="SELECT p FROM Person p WHERE p.id = (SELECT h.personByReceiver.id FROM HousePoints h WHERE h.points = (SELECT MAX(h.points) FROM HousePoints h))")
+@NamedQuery(name="personaDarPuntosMax", query="SELECT p FROM Person p WHERE p.id = (SELECT h.personByGiver.id FROM HousePoints h WHERE h.points = (SELECT MAX(h.points) FROM HousePoints h))")
 @Table(name="person")
 public class Person {
     private int id;
