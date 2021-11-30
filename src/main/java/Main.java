@@ -1,3 +1,4 @@
+import entity.Course;
 import entity.House;
 import entity.Person;
 import javax.persistence.EntityManager;
@@ -32,6 +33,10 @@ public class Main {
         List<House> houses = em.createNamedQuery("getAllHousePoints", House.class).getResultList();
         for (House p : houses) {
             System.out.println(p.toString());
+        }
+        List<Course> coursesProfessors = em.createNamedQuery("getCoursesProfessors", Course.class).getResultList();
+        for (Course c : coursesProfessors) {
+            System.out.println(c.toString());
         }
     }
 }
