@@ -1,3 +1,4 @@
+import entity.House;
 import entity.Person;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,5 +28,10 @@ public class Main {
         Query q3 = em3.createNamedQuery("personaDarPuntosMax", Person.class);
         Person p3 = (Person) q3.getSingleResult();
         System.out.println(p3.toString());
+
+        List<House> houses = em.createNamedQuery("getAllHousePoints", House.class).getResultList();
+        for (House p : houses) {
+            System.out.println(p.toString());
+        }
     }
 }

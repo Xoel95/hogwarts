@@ -3,7 +3,13 @@ package entity;
 import javax.persistence.*;
 
 @Entity
+@NamedNativeQuery(
+        name = "getAllHousePoints",
+        query = "select * from house h inner join house_points hp on h.id=hp.id;",
+        resultClass=House.class
+)
 @Table(name="house")
+
 public class House {
     private int id;
     private String name;
@@ -53,6 +59,15 @@ public class House {
     @JoinColumn(name = "head_teacher", referencedColumnName = "id", nullable = false)
     public Person getPersonByHeadTeacher() {
         return personByHeadTeacher;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", personByHeadTeacher=" + personByHeadTeacher +
+                '}';
     }
 
     public void setPersonByHeadTeacher(Person personByHeadTeacher) {
