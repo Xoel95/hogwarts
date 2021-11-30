@@ -9,6 +9,7 @@ public class Course {
     private int id;
     private String name;
     private List<Person> people;
+    private Person teacher;
 
     @Id
     @Column(name = "id")
@@ -58,5 +59,15 @@ public class Course {
 
     public void setPeople(List<Person> people) {
         this.people = people;
+    }
+
+    @ManyToOne
+    @JoinColumn (name = "teacher_id")
+    public Person getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Person teacher) {
+        this.teacher = teacher;
     }
 }

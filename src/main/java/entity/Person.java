@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name="consultarTrabajadores", query="select e from Employee e")
+@NamedQuery(name="consultarAlumnosMaestro", query="select p from Person p INNER JOIN p.courses c WHERE c.teacher.id = ?1")
 @Table(name="person")
 public class Person {
     private int id;
@@ -82,5 +82,8 @@ public class Person {
         this.courses = courses;
     }
 
-
+    @Override
+    public String toString() {
+        return "La persona es " + firstName + " " + lastName + " con id " + id;
+    }
 }
