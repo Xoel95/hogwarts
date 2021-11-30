@@ -10,12 +10,17 @@ import java.util.List;
         resultClass=Course.class
 )
 @Table(name="course")
+@NamedNativeQuery(
+        name = "getCoursesProfessors",
+        query = "select * from course c left join person p on p.id=c.teacher_id;",
+        resultClass=Course.class
+)
 public class Course {
     private int id;
     private String name;
     private List<Person> people;
     private Person teacher;
-
+    public Course() {}
     @Id
     @Column(name = "id")
     public int getId() {
@@ -70,6 +75,23 @@ public class Course {
     @JoinColumn (name = "teacher_id")
     public Person getTeacher() {
         return teacher;
+    }
+
+    public Course(int id, String name, List<Person> people, Person teacher) {
+        this.id = id;
+        this.name = name;
+        this.people = people;
+        this.teacher = teacher;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", people=" + people +
+                ", teacher=" + teacher +
+                '}';
     }
 
     public void setTeacher(Person teacher) {
